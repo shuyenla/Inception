@@ -2,23 +2,6 @@
 
 # https://docs.docker.com/compose/gettingstarted/
 
-# version: "3.9"  # optional since v1.27.0
-# services:
-#   web:
-#     build: .
-#     ports:
-#       - "5000:5000"
-#     volumes:
-#       - .:/code
-#       - logvolume01:/var/log
-#     links:
-#       - redis
-#   redis:
-#     image: redis
-# volumes:
-#   logvolume01: {}
-
-
 # https://devopsheaven.com/docker/docker-compose/volumes/2018/01/16/volumes-in-docker-compose.html
 # Docker named volumes
 # Syntax: named_volume_name:/container/path
@@ -35,7 +18,6 @@ services:
 
         volumes:
 
-        links:
 
     nginx:
         build: ./nginx/
@@ -44,7 +26,6 @@ services:
 
         volumes:
             
-        links:
 
     wordpress:
         build: ./wordpress/
@@ -53,6 +34,5 @@ services:
 
         volumes:
             
-        links:
 
-volumes:
+volumes: 

@@ -35,5 +35,4 @@ RUN chmod -R 755 /var/www/*
 
 # Start the service
 CMD service nginx start; \
-service nginx reload; \
-bash
+service nginx reload;

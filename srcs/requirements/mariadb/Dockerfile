@@ -25,7 +25,6 @@ CMD service mysql start; \
     mysql -u root -p$PASSWORD -e "CREATE DATABASE wordpress;"; \
     mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$USERNAME'@'localhost';"; \
     mysql -u root -p$PASSWORD -e "FLUSH PRIVILEGES;"; \
-    service mysql reload; \
-    bash
+    service mysql reload;
 
 #php should be dealt with wordpress then how to do this php-mysql
