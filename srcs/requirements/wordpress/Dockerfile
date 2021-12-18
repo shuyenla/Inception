@@ -2,7 +2,8 @@ FROM debian:buster
 
 RUN apt-get update -y && \
     apt-get install -y wget && \
-    apt-get install -y libnss3-tools
+    apt-get install -y libnss3-tools && \
+    apt-get install -y php php-fpm php-gd php-cli php-curl php-json
 
 
 # WORDPRESS
@@ -13,4 +14,3 @@ RUN mv wordpress/ /var/www/localhost
 ADD ./srcs/wp-config.php /var/www/localhost/wordpress
 ADD ./srcs/index.html /var/www/localhost
 RUN rm latest.tar.gz
-

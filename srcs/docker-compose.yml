@@ -12,27 +12,30 @@
 services:
 
     mariadb:
-        build: ./mariadb/
+        build: ./requirement/mariadb/
 
         ports:
 
-        volumes:
+        volumes: /home/shlu/data/db/:var/lib/mysql
 
-
-    nginx:
-        build: ./nginx/
-
-        ports:
-
-        volumes:
-            
+        restart: always
 
     wordpress:
         build: ./wordpress/
 
+        ports: 
+
+        volumes: /home/shlu/data/html:/var/www/html
+
+        restart: always
+
+    nginx:
+        build: ./requirement/nginx/
+
         ports:
 
         volumes:
             
+
 
 volumes: 

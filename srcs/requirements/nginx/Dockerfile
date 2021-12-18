@@ -6,8 +6,8 @@ RUN apt-get update -y && \
     apt-get install -y nginx
 
 
-# SSL
 
+# SSL
 RUN mkdir ~/mkcert
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
 RUN mv mkcert-v1.1.2-linux-amd64 mkcert; \

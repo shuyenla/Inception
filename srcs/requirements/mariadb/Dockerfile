@@ -5,18 +5,8 @@ FROM debian:buster
 RUN apt-get update -y && \
     apt-get install -y wget && \
     apt-get install -y libnss3-tools && \
-    apt-get install -y mariadb-server && \
-    apt-get install -y php php-fpm php-gd php-mysql php-cli php-curl php-json && \
-    apt-get install -y php-mysql
+    apt-get install -y mariadb-server
 
-
-# PHPMYADMIN
-
-RUN mkdir -p /var/www/localhost/phpmyadmin
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz
-RUN tar xzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/localhost/phpmyadmin
-ADD ./conf/config.inc.php /var/www/localhost/phpmyadmin/
-RUN rm phpMyAdmin-4.9.0.1-english.tar.gz
 
 # Start the servicr and setup MYSQL
 CMD service mysql start; \
@@ -26,5 +16,3 @@ CMD service mysql start; \
     mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$USERNAME'@'localhost';"; \
     mysql -u root -p$PASSWORD -e "FLUSH PRIVILEGES;"; \
     service mysql reload;
-
-#php should be dealt with wordpress then how to do this php-mysql
