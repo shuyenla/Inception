@@ -8,34 +8,30 @@
 
 
 # https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
+version: '3.3'
 
 services:
 
-    mariadb:
-        build: ./requirement/mariadb/
+    # mariadb:
+    #     build: ./requirements/mariadb/
 
-        ports:
+    #     volumes: /home/shlu/data/db/:var/lib/mysql
 
-        volumes: /home/shlu/data/db/:var/lib/mysql
+    #     restart: always
 
-        restart: always
+    # wordpress:
+    #     build: ./requirements/wordpress/
 
-    wordpress:
-        build: ./wordpress/
+    #     volumes: /home/shlu/data/html:/var/www/html
 
-        ports: 
+    #     depends_on: mariadb
 
-        volumes: /home/shlu/data/html:/var/www/html
-
-        restart: always
+    #     restart: always
 
     nginx:
-        build: ./requirement/nginx/
+        build: ./requirements/nginx/
 
-        ports:
-
-        volumes:
+        ports: 
+            - 443
             
-
-
-volumes: 
+        restart: always

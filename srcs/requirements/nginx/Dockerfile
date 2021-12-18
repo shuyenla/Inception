@@ -1,11 +1,8 @@
 FROM debian:buster
 
 RUN apt-get update -y && \
-    apt-get install -y wget && \
-    apt-get install -y libnss3-tools && \
-    apt-get install -y nginx
-
-
+    apt-get install -y wget nginx
+    # apt-get install -y libnss3-tools
 
 # SSL
 RUN mkdir ~/mkcert
@@ -21,10 +18,10 @@ RUN mv localhost.pem ~/mkcert; \
 # NGINX
 
 # add nginx config file
-ADD ./conf/localhost ./etc/nginx/sites-available/localhost
+ADD ./conf/nginx.conf ./etc/nginx/sites-available/nginx.conf
 # link nginx config file
 # ** here we should use the absolute path to avoid link point back to itself **
-RUN ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
+RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 
 
 # Set permission and owner for NGINX
@@ -34,5 +31,6 @@ RUN chmod -R 755 /var/www/*
 
 
 # Start the service
-CMD service nginx start; \
-service nginx reload;
+# CMD service nginx start; \
+# service nginx reload;
+CMD bash
