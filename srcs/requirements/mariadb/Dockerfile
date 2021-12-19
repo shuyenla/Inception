@@ -3,16 +3,13 @@
 FROM debian:buster
 
 RUN apt-get update -y && \
-    apt-get install -y wget && \
-    apt-get install -y libnss3-tools && \
+    apt-get upgrade -y && \
     apt-get install -y mariadb-server
 
-
-# Start the servicr and setup MYSQL
+# Start the service and setup MYSQL
 CMD service mysql start; \
-    service php7.3-fpm start; \
-    mysql -u root -p$PASSWORD -e "CREATE USER '$USERNAME'@'localhost' identified by '$PASSWORD';"; \
-    mysql -u root -p$PASSWORD -e "CREATE DATABASE wordpress;"; \
-    mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$USERNAME'@'localhost';"; \
+    mysql -u root -p$PASSWORD -e "CREATE OR REPLACE USER $USERNAME@localhost IDENTIFIED BY '$PASSWORD';"; \
+    mysql -u root -p$PASSWORD -e "CREATE DATABASE IF NOT EXISTS wordpress;"; \
+    mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO $USERNAME@localhost;"; \
     mysql -u root -p$PASSWORD -e "FLUSH PRIVILEGES;"; \
     service mysql reload;

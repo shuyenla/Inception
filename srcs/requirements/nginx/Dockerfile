@@ -1,8 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update -y && \
-    apt-get install -y wget nginx
-    # apt-get install -y libnss3-tools
+    apt-get install -y apt-utils wget nginx
 
 # SSL
 RUN mkdir ~/mkcert
@@ -31,6 +30,4 @@ RUN chmod -R 755 /var/www/*
 
 
 # Start the service
-# CMD service nginx start; \
-# service nginx reload;
-CMD bash
+CMD ["nginx", "-g", "daemon off;"]

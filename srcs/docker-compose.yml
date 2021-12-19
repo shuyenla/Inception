@@ -8,30 +8,59 @@
 
 
 # https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
+
 version: '3.3'
 
 services:
 
-    # mariadb:
-    #     build: ./requirements/mariadb/
+    mariadb:
 
-    #     volumes: /home/shlu/data/db/:var/lib/mysql
+        tty: true
 
-    #     restart: always
+        container_name: mariaDB
 
-    # wordpress:
-    #     build: ./requirements/wordpress/
+        build: ./requirements/mariadb/
 
-    #     volumes: /home/shlu/data/html:/var/www/html
+        volumes:
+            - /home/shlu/data/dataBase:/var/lib/mysql
 
-    #     depends_on: mariadb
+        environment:
+            USERNAME: shlu
+            PASSWORD: kfhgsklf48
+        
+        # command: service mysql reload
+    
+        restart: "no"
 
-    #     restart: always
+    wordpress:
+
+        tty: true
+
+        container_name: WordPress
+
+        build: ./requirements/wordpress/
+
+        volumes: 
+            - /home/shlu/data/websiteFiles:/var/www/html
+
+        depends_on:
+            - mariadb
+
+        command: service php7.3-fpm start
+
+        restart: "no"
 
     nginx:
+
+        container_name: nginx
+
         build: ./requirements/nginx/
 
         ports: 
             - 443
+
+        depends_on:
+            - mariadb
+            - wordpress
             
-        restart: always
+        restart: "no"
