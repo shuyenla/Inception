@@ -31,3 +31,4 @@ RUN chmod -R 755 /var/www/*
 
 # Start the service
 CMD ["nginx", "-g", "daemon off;"]
+#    service nginx status

@@ -24,17 +24,19 @@ services:
         volumes:
             - /home/shlu/data/dataBase:/var/lib/mysql
 
+        # ports:
+        #     - 3306
+
         environment:
             USERNAME: shlu
             PASSWORD: kfhgsklf48
-        
-        # command: service mysql reload
     
-        restart: "no"
+        restart: "always"
+
+        stdin_open: true
+        tty: true
 
     wordpress:
-
-        tty: true
 
         container_name: WordPress
 
@@ -43,12 +45,19 @@ services:
         volumes: 
             - /home/shlu/data/websiteFiles:/var/www/html
 
+        # ports:
+        #     - 9000
+
+        environment:
+            WORDPRESS_db_host: mariadb:3306
+
         depends_on:
             - mariadb
 
-        command: service php7.3-fpm start
+        restart: "always"
 
-        restart: "no"
+        stdin_open: true
+        tty: true
 
     nginx:
 
@@ -63,4 +72,7 @@ services:
             - mariadb
             - wordpress
             
-        restart: "no"
+        restart: "always"
+
+        stdin_open: true
+        tty: true
