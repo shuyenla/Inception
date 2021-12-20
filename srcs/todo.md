@@ -1,4 +1,4 @@
-networks
+-networks
 nginx with TLS1.2 or TLS1.3 only
 .env
 second volume with wp websites files # not sure what does it mean
