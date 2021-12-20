@@ -7,7 +7,9 @@ RUN apt-get update -y && \
     apt-get install -y mariadb-server
 
 # Start the service and setup MYSQL 
-CMD service mysql start; \
+
+# CMD service mysql start; \
+CMD mysqld_safe; \
     mysql -u root -p$PASSWORD -e "CREATE OR REPLACE USER $USERNAME@localhost IDENTIFIED BY '$PASSWORD';"; \
     mysql -u root -p$PASSWORD -e "CREATE DATABASE IF NOT EXISTS wordpress;"; \
     mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO $USERNAME@localhost;"; \

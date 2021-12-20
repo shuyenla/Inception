@@ -56,8 +56,8 @@ services:
 
         restart: "always"
 
-        stdin_open: true
-        tty: true
+        # stdin_open: true
+        # tty: true
 
     nginx:
 

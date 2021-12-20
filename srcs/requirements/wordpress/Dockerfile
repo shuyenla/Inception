@@ -23,9 +23,9 @@ RUN mkdir -p /run/php/
 # RUN chmod -R 755 /var/run/
 # RUN service php7.3-fpm start
 
-CMD ["php-fpm7.3"] \
-# -y /etc/php/7.3/fpm/php-fpm.conf
+CMD ["php-fpm7.3", "-F"]
+# CMD php-fpm7.3 -F; \
+#-y /etc/php/7.3/fpm/php-fpm.conf; \
 # CMD service php7.3-fpm start; \
-    service php7.3-fpm status; \
-    cat /var/log/php7.3-fpm.log
-
+    # service php7.3-fpm status; \
+    # cat /var/log/php7.3-fpm.log
