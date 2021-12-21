@@ -22,7 +22,7 @@ services:
         build: ./requirements/mariadb/
 
         volumes:
-            - /home/shlu/data/dataBase:/var/lib/mysql
+            - mysql_volume:/var/lib/mysql
 
         expose:
             - 3306
@@ -31,64 +31,73 @@ services:
             - inter
 
         environment:
-            USERNAME: shlu
-            PASSWORD: kfhgsklf48
+            MYSQL_USERNAME: shlu
+            MYSQL_PASSWORD: kfhgsklf48
     
         restart: "on-failure"
 
-    wordpress:
+    # wordpress:
 
-        container_name: WordPress
+    #     container_name: WordPress
 
-        build: ./requirements/wordpress/
+    #     build: ./requirements/wordpress/
 
-        volumes: 
-            - /home/shlu/data/websiteFiles:/var/www/localhost
+    #     volumes: 
+    #         - /home/shlu/data/websiteFiles:/var/www/localhost
 
-        expose:
-            - 3306
-            - 9000
+    #     expose:
+    #         - 3306
+    #         - 9000
 
-        networks:
-            - inter
+    #     networks:
+    #         - inter
 
-        environment:
-            WORDPRESS_db_host: mariadb:3306
+    #     environment:
+    #         WORDPRESS_db_host: mariadb:3306
 
-        depends_on:
-            - mariadb
+    #     depends_on:
+    #         - mariadb
 
-        restart: "on-failure"
+    #     restart: "on-failure"
 
-        # stdin_open: true
-        # tty: true
+    #     # stdin_open: true
+    #     # tty: true
 
-    nginx:
+    # nginx:
 
-        container_name: nginx
+    #     container_name: nginx
 
-        build: ./requirements/nginx/
+    #     build: ./requirements/nginx/
 
-        volumes: 
-            - /home/shlu/data/websiteFiles:/var/www/localhost
+    #     volumes: 
+    #         - /home/shlu/data/websiteFiles:/var/www/localhost
 
-        expose:
-            - 9000
+    #     expose:
+    #         - 9000
 
-        ports:
-            - 443:443
+    #     ports:
+    #         - 443:443
 
-        networks:
-            - inter
+    #     networks:
+    #         - inter
 
-        depends_on:
-            - mariadb
-            - wordpress
+    #     depends_on:
+    #         - mariadb
+    #         - wordpress
             
-        restart: "on-failure"
+    #     restart: "on-failure"
 
-        # stdin_open: true
-        # tty: true
+    #     # stdin_open: true
+    #     # tty: true
+
+volumes:
+    mysql_volume:
+        driver: local
+        driver_opts:
+          type: 'none'
+          o: 'bind'
+          device: '/home/shlu/data/dataBase/'
+        
 
 networks:
     inter:

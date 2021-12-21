@@ -10,12 +10,13 @@ RUN apt-get update -y && \
 
 RUN mkdir /var/run/mysqld
 RUN chown -R mysql:mysql /var/run/mysqld
+RUN mysql_install_db
+# RUN mysql_secure_installation
+COPY ./conf/* ./
+COPY ./conf/init.sql /tmp/
 
-CMD mysqld_safe; \
-    mysql -u root -p$PASSWORD -e "CREATE OR REPLACE USER $USERNAME@localhost IDENTIFIED BY '$PASSWORD';"; \
-    mysql -u root -p$PASSWORD -e "CREATE DATABASE IF NOT EXISTS wordpress;"; \
-    mysql -u root -p$PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO $USERNAME@localhost;"; \
-    mysql -u root -p$PASSWORD -e "FLUSH PRIVILEGES;"; \
-    # ; \
-    service mysql reload; \
+# CMD bash
+
+CMD ./start.sh; \
+    mysqld --user=mysql --init-file="/tmp/init.sql"; \
     cat /var/log/mysql/error.log
