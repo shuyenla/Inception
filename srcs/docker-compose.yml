@@ -43,7 +43,7 @@ services:
         build: ./requirements/wordpress/
 
         volumes: 
-            - /home/shlu/data/websiteFiles:/var/www/html
+            - /home/shlu/data/websiteFiles:/var/www/localhost
 
         expose:
             - 3306
@@ -68,6 +68,9 @@ services:
         container_name: nginx
 
         build: ./requirements/nginx/
+
+        volumes: 
+            - /home/shlu/data/websiteFiles:/var/www/localhost
 
         expose:
             - 9000

@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update -y && \
-    apt-get install -y apt-utils wget nginx
+    apt-get install -y apt-utils libnss3-tools wget nginx
 
 # SSL
 RUN mkdir ~/mkcert
@@ -17,7 +17,7 @@ RUN mv localhost.pem ~/mkcert; \
 # NGINX
 
 # add nginx config file
-ADD ./conf/nginx.conf ./etc/nginx/sites-available/nginx.conf
+COPY ./conf/nginx.conf ./etc/nginx/sites-available/nginx.conf
 # link nginx config file
 # ** here we should use the absolute path to avoid link point back to itself **
 RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
