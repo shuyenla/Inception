@@ -18,5 +18,5 @@ RUN chmod 755 /etc/mysql/my.cnf
 # CMD bash
 
 CMD /tmp/start.sh; \
-    mysqld --user=mysql --init-file="/tmp/init.sql"; \
+    mysqld --user=mysql  --init-file="/tmp/init.sql"; \
     cat /var/log/mysql/error.log

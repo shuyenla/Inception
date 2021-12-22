@@ -9,9 +9,9 @@ RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v
 RUN mv mkcert-v1.1.2-linux-amd64 mkcert; \
     chmod +x mkcert; \
     ./mkcert -install; \
-    ./mkcert localhost
-RUN mv localhost.pem ~/mkcert; \
-    mv localhost-key.pem ~/mkcert
+    ./mkcert shlu.42.fr
+RUN mv shlu.42.fr.pem ~/mkcert; \
+    mv shlu.42.fr-key.pem ~/mkcert
 
 
 # NGINX

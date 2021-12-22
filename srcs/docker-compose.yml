@@ -12,12 +12,17 @@
 version: '3.3'
 
 services:
+    # adminer:
+    #     image: adminer
+    #     restart: always
+    #     ports:
+    #       - 8080:8080
+    #     networks:
+    #     - inter
 
     mariadb:
 
-        tty: true
-
-        container_name: mariaDB
+        container_name: mariadb
 
         build: ./requirements/mariadb/
 
@@ -30,10 +35,8 @@ services:
         networks:
             - inter
 
-        environment:
-            MYSQL_USERNAME: shlu
-            MYSQL_PASSWORD: kfhgsklf48
-    
+        env_file: .env
+
         restart: "on-failure"
 
     wordpress:
@@ -43,25 +46,18 @@ services:
         build: ./requirements/wordpress/
 
         volumes: 
-            - webfile_volume:/var/www/localhost
+            - webfile_volume:/var/www/wordpress
 
         expose:
-            - 3306
             - 9000
 
         networks:
             - inter
 
-        environment:
-            WORDPRESS_db_host: mariadb:3306
-
         depends_on:
             - mariadb
 
         restart: "on-failure"
-
-        # stdin_open: true
-        # tty: true
 
     nginx:
 
@@ -72,8 +68,8 @@ services:
         volumes: 
             - webfile_volume:/var/www/localhost
 
-        expose:
-            - 9000
+        # expose:
+        #     - 9000
 
         ports:
             - 443:443
@@ -87,8 +83,6 @@ services:
             
         restart: "on-failure"
 
-        # stdin_open: true
-        # tty: true
 
 volumes:
     db_volume:
