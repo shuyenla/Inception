@@ -11,12 +11,12 @@ RUN apt-get update -y && \
 RUN mkdir /var/run/mysqld
 RUN chown -R mysql:mysql /var/run/mysqld
 RUN mysql_install_db
-# RUN mysql_secure_installation
-COPY ./conf/* ./
-COPY ./conf/init.sql /tmp/
+COPY ./conf/* /tmp/
+RUN mv /tmp/my.cnf /etc/mysql/my.cnf
+RUN chmod 755 /etc/mysql/my.cnf
 
 # CMD bash
 
-CMD ./start.sh; \
+CMD /tmp/start.sh; \
     mysqld --user=mysql --init-file="/tmp/init.sql"; \
     cat /var/log/mysql/error.log

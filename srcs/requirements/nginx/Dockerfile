@@ -17,10 +17,13 @@ RUN mv localhost.pem ~/mkcert; \
 # NGINX
 
 # add nginx config file
-COPY ./conf/nginx.conf ./etc/nginx/sites-available/nginx.conf
+# COPY ./conf/nginx.conf ./etc/nginx/sites-available/nginx.conf
+
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+
 # link nginx config file
 # ** here we should use the absolute path to avoid link point back to itself **
-RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
+# RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 
 
 # Set permission and owner for NGINX
