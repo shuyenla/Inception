@@ -10,10 +10,10 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 # wordpress
 RUN mkdir -p /var/www/wordpress
-RUN wp core download --path=/var/www/wordpress --allow-root
+RUN wp core download --version=4.8.15 --path=/var/www/wordpress --allow-root
 COPY ./conf/wp-config.php /var/www/wordpress
 RUN chown -R www-data:www-data /var/www/*
-RUN chmod -R 755 /var/www/*
+# RUN chmod -R 755 /var/www/*
 
 # configuration for wordpress
 COPY ./tools/wp_start.sh /tmp/

@@ -20,19 +20,19 @@ down:
 stop:
 	docker-compose -f ${FILE} stop
 
-rm: stop
+clean: stop
 	docker-compose -f ${FILE} rm
 
 volume:
 	docker volumes ls
 
-rmv: rm
+fclean: clean
 	docker volume rm srcs_db_volume
 	docker volume rm srcs_webfile_volume
 	sudo rm -rf ${LOCAL_VOLUME}/dataBase/*
 	sudo rm -rf ${LOCAL_VOLUME}/websitesFiles/*
 
-re: rmv all
+re: fclean all
 
 logs:
 	docker-compose -f ${FILE} logs --tail=100 -f $(c)
