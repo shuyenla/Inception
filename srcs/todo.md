@@ -5,4 +5,4 @@
 -(WP)configure 2 users....
 -configure domain name (in makefile)
 
-rcead about PID 1 and best practice for dockerfiles
+read about PID 1 and best practice for dockerfiles
