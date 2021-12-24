@@ -1,4 +1,7 @@
-# https://medium.com/freestoneinfotech/simplifying-docker-compose-operations-using-makefile-26d451456d63
+###
+# makefile for docker compose
+###
+  # https://medium.com/freestoneinfotech/simplifying-docker-compose-operations-using-makefile-26d451456d63
 
 FILE = srcs/docker-compose.yml
 LOCAL_VOLUME = /home/shlu/data
@@ -14,6 +17,12 @@ up:
 ps:
 	docker ps
 
+v:
+	docker volumes ls
+
+n:
+	docker-compose -f ${FILE} network ls
+
 down:
 	docker-compose -f ${FILE} down
 
@@ -22,15 +31,11 @@ stop:
 
 clean: stop
 	docker-compose -f ${FILE} rm
-
-volume:
-	docker volumes ls
-
-fclean: clean
 	docker volume rm srcs_db_volume
 	docker volume rm srcs_webfile_volume
-	sudo rm -rf ${LOCAL_VOLUME}/dataBase/*
-	sudo rm -rf ${LOCAL_VOLUME}/websitesFiles/*
+
+fclean: stop
+	./srcs/requirements/tools/fclean.sh
 
 re: fclean all
 

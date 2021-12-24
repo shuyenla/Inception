@@ -1,12 +1,20 @@
-# https://docs.docker.com/engine/install/linux-postinstall/
+###
+# to instal docker
+###
+  # https://docs.docker.com/engine/install/linux-postinstall/
 
-# https://docs.docker.com/compose/gettingstarted/
+###
+# docker compose starter
+###
+  # https://docs.docker.com/compose/gettingstarted/
+  # https://devopsheaven.com/docker/docker-compose/volumes/2018/01/16/volumes-in-docker-compose.html
+    # Docker named volumes
+    # Syntax: named_volume_name:/container/path
 
-# https://devopsheaven.com/docker/docker-compose/volumes/2018/01/16/volumes-in-docker-compose.html
-# Docker named volumes
-# Syntax: named_volume_name:/container/path
-
-# https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
+###
+# great guide for this project
+###
+  # https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
 
 version: '3.3'
 
@@ -44,7 +52,7 @@ services:
         container_name: nginx
         build: ./requirements/nginx/
         volumes: 
-            - webfile_volume:/var/www/localhost
+            - webfile_volume:/var/www/wordpress
         ports:
             - 443:443
         networks:

@@ -3,7 +3,7 @@ FROM debian:buster
 RUN apt-get update -y && \
     apt-get install -y apt-utils libnss3-tools wget nginx
 
-# SSL
+# SSL tool
 RUN mkdir ~/mkcert
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
 RUN mv mkcert-v1.1.2-linux-amd64 mkcert; \
@@ -13,13 +13,12 @@ RUN mv mkcert-v1.1.2-linux-amd64 mkcert; \
 RUN mv shlu.42.fr.pem ~/mkcert; \
     mv shlu.42.fr-key.pem ~/mkcert
 
-# NGINX
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-
 # Set permission and owner for NGINX
 RUN chown -R www-data:www-data /var/www/*
 RUN chmod -R 755 /var/www/*
 
+# configuation file of NGINX
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+
 # Start the service
 CMD ["nginx", "-g", "daemon off;"]
-#    service nginx status
